@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Index</title>
+</head>
+<body>
+<a href="tel:+919762528355">
+    Call number!
+</a>
+<br>
+<a href="sms:+9162528355?body=Hello%20there!">
+    Compose SMS!
+</a>
+<br>
+<form action="display" method="get" name="myform">
+         Enter a value : <input type="text" name="newinput" />
+         <input type="button" value="Result"  onclick="showResult();" />
+         <output name="result"></output>
+       <!--    <br><input accept="result" name="out"> -->
+        <br><input accept="result" name="out" onchange="submit" >
+      </form>
+
+<br>
+<script type="text/javascript">
+function showResult()
+{
+   x = document.forms["myform"]["newinput"].value;
+   document.forms["myform"]["result"].value=x;
+   document.forms["myform"]["out"].value=x;
+}
+
+
+// Check support
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success);
+}
+
+function success(position) {
+    console.log('Latitude: ' + position.coords.latitude);
+    console.log('Longitude: ' + position.coords.longitude);
+    console.log('I can too...');
+    document.forms["location"]["coords"].value=position.coords.latitude;
+}
+
+if (window.DeviceOrientationEvent) {
+	
+    window.addEventListener('deviceorientation', function(eventData) {
+        // gamma is the left-to-right tilt in degrees
+        console.log(eventData.gamma);
+        console.log('ok...in');
+        document.forms["location"]["gamma"].value=eventData.gamma;
+
+        // beta is the front-to-back tilt in degrees
+        console.log(eventData.beta);
+        document.forms["location"]["beta"].value=eventData.beta;
+
+        // alpha is the compass direction the device is facing in degrees
+        console.log(eventData.alpha);
+        document.forms["location"]["alpha"].value=eventData.alpha;
+    }, false);
+}
+
+if (window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', function(eventData) {   
+        // Acceleration
+        console.log(eventData.acceleration.x);
+        document.forms["location"]["x"].value=eventData.acceleration.x;
+        console.log(eventData.acceleration.y);
+        document.forms["location"]["y"].value=eventData.acceleration.y;
+        console.log(eventData.acceleration.z);
+        document.forms["location"]["z"].value=eventData.acceleration.z;
+    
+        // Acceleration including gravity
+        console.log(eventData.accelerationIncludingGravity.x);
+        document.forms["location"]["gravity_x"].value=eventData.accelerationIncludingGravity.x;
+        console.log(eventData.accelerationIncludingGravity.y);
+        document.forms["location"]["gravity_y"].value=eventData.accelerationIncludingGravity.y;
+        document.forms["location"]["out"].value=eventData.accelerationIncludingGravity.y;
+        console.log(eventData.accelerationIncludingGravity.z);
+        document.forms["location"]["gravity_z"].value=eventData.accelerationIncludingGravity.z;
+
+        // Rotation rate
+        console.log(eventData.rotationRate.alpha);
+        document.forms["location"]["rota_alpha"].value=eventData.rotationRate.alpha;
+        console.log(eventData.rotationRate.beta);
+        document.forms["location"]["rota_beta"].value=eventData.rotationRate.beta;
+        console.log(eventData.rotationRate.gamma);
+        document.forms["location"]["rota_gamma"].value=eventData.rotationRate.gamma;
+    }, false);
+}
+
+var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery;
+
+function logBattery(battery) {
+    console.log(battery.level);
+    console.log(battery.charging);
+    document.forms["location"]["level"].value=battery.level*100;
+    document.forms["location"]["isCharging"].value=battery.dischargingTime/3600;
+    
+    console.log(battery.dischargingTime);
+
+    battery.addEventListener('chargingchange', function() {
+        console.log('Battery chargingchange event: ' + battery.charging);
+    }, false);
+}
+
+if (navigator.getBattery) {
+    navigator.getBattery().then(logBattery);
+} else if (battery) {
+    logBattery(battery);
+}
+
+</script>
+
+<form action="data" name="location" onchange="submit">
+
+<output name="coords"></output>
+<br>alpha is the compass direction the device is facing in degrees x: 
+<output name="alpha"></output>
+<br>beta is the front-to-back tilt in degrees.............................................. y: 
+<output name="beta"></output>
+<br>gamma is the left-to-right tilt in degrees............................................ z: 
+<output name="gamma"></output>
+<br>Battery: 
+<output name="level"></output>
+<br>DisCharging: 
+<output name="isCharging"></output>
+<br>
+<br>
+Acceleration
+<br>alpha is the compass direction the device is facing in degrees x: 
+<output name="x"></output>
+<br>beta is the front-to-back tilt in degrees.............................................. y: 
+<output name="y"></output>
+<br>gamma is the left-to-right tilt in degrees............................................ z: 
+<output name="z"></output>
+<br>
+<br>
+Acceleration including gravity
+<br>alpha is the compass direction the device is facing in degrees x: 
+<output name="gravity_x"></output>
+<br>beta is the front-to-back tilt in degrees.............................................. y: 
+<output name="gravity_y"></output>
+<br>gamma is the left-to-right tilt in degrees............................................ z: 
+<output name="gravity_z"></output>
+<br>
+<br>
+Rotation rate
+<br>alpha is the compass direction the device is facing in degrees x: 
+<output name="rota_alpha"></output>
+<br>beta is the front-to-back tilt in degrees.............................................. y: 
+<output name="rota_beta"></output>
+<br>gamma is the left-to-right tilt in degrees............................................ z: 
+<output name="rota_gamma"></output>
+
+<br>
+<input type="text" name="out" onchange='this.form.submit()'>
+<br>
+
+
+  <br>lat: +
+</form>
+
+</body>
+</html>
