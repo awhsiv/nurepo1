@@ -14,6 +14,7 @@
       <img src="/lang-logo.png">
     </a>
     <h1>Hey dunoooooooo...............!!!</h1>
+    <h1>Hey डुनूनूनूनूनूनूनूनूनूनूनू...............!!!</h1>
     <p>Please go through following apps......</p>
      <a type="button" class="btn btn-lg btn-primary" href="/index.html"> Tracing Motion </a>
      <a type="button" class="btn btn-lg btn-primary" href="/videoplayer.html"> Video Player </a>
